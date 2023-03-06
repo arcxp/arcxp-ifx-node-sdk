@@ -1,0 +1,35 @@
+{
+  "name": "@arcxp/arcxp-ifx-node-sdk",
+  "version": "1.0.0",
+  "description": "ArcXP Node.js SDK NPM package",
+  "engines": {
+    "node": "18.13.0",
+    "npm": "8.x"
+  },
+  "main": "lambdaHandler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ext .js .",
+    "lint:fix": "eslint --ext .js --fix .",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arcxp/arcxp-ifx-node-sdk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arcxp/arcxp-ifx-node-sdk/issues"
+  },
+  "homepage": "https://github.com/arcxp/arcxp-ifx-node-sdk#readme",
+  "devDependencies": {
+    "eslint": "8.29.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "husky": "8.0.2"
+  },
+  "dependencies": {
+    "dotenv": "16.0.3"
+  }
+}
