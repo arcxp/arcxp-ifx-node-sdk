@@ -1,6 +1,6 @@
 {
   "name": "@arcxp/arcxp-ifx-node-sdk",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ArcXP Node.js SDK NPM package",
   "engines": {
     "node": "18.13.0",
