@@ -39,6 +39,15 @@ const hasRawEventKey = (rawEvent) => {
 };
 
 const eventsParser = (rawEvent) => {
+  if (typeof rawEvent === 'string') {
+    try {
+      /* eslint-disable no-param-reassign */
+      rawEvent = JSON.parse(rawEvent);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   if (typeof rawEvent === 'object'
     && typeof rawEvent.body === 'object'
     && hasRawEventKey(rawEvent)
@@ -80,7 +89,7 @@ const eventsParser = (rawEvent) => {
       eventProcessed.key = addNamespace(rawEvent.eventType);
       eventProcessed.typeId = 1;
       // 'eventTime' is in EPOCH format based on seconds
-      eventProcessed.time = new Date(getNumberValue(rawEvent.eventTime * 1000));
+      eventProcessed.time = new Date(getNumberValue(rawEvent.eventTime));
     } else if (Object.hasOwn(rawEvent, 'key')) {
       eventProcessed.version = 1;
       eventProcessed.key = addNamespace(rawEvent.key);

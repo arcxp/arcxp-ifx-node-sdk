@@ -31,4 +31,5 @@ const eventsHandlersRouter = require('./src/eventsHandlersRouter');
 const eventsHandlers = require(process.cwd() + '/src/eventsHandlers');
 const eventsRouter = require(process.cwd() + '/src/eventsRouter.json');
 
-module.exports.handler = eventsHandlersRouter(eventsHandlers, eventsRouter);
+module.exports.handler = eventsHandlersRouter(eventsHandlers, eventsRouter, true);
+module.exports.localHandler = eventsHandlersRouter(eventsHandlers, eventsRouter, false);

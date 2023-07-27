@@ -2,10 +2,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const DEFAULT_PAYLOAD = {
+  body: {},
+  version: 2,
+  typeId: 1,
+  time: new Date(),
+  uuid: '',
+  currentUserId: '',
+};
+
 /**
  *
  * @param {Function} handlerMethod This optional parameter accepts an event body and returns a
- * response. It will send the event body to the proper handler based on event.key.
+ * response. It will send the event body to the proper handler based on the 'key' property.
  *
  * @returns an ExpressJS server that is listening for an event body in a POST request.
  */
@@ -17,7 +26,7 @@ const createServer = (handlerMethod) => {
     handler = handlerMethod;
   } else {
     // eslint-disable-next-line global-require
-    handler = require('../lambdaHandler').handler;
+    handler = require('../lambdaHandler').localHandler;
   }
 
   app.use(bodyParser.json());
@@ -29,8 +38,18 @@ const createServer = (handlerMethod) => {
 
   app.post('/ifx/local/invoke', async (req, res) => {
     try {
-      const { body } = req;
-      if (!body || Object.keys(body).length === 0) throw new Error('Request body is required');
+      const body = {
+        ...DEFAULT_PAYLOAD,
+        ...req.body,
+      };
+
+      if (req.body.time) {
+        body.time = new Date(Number(req.body.time) * 1000);
+      }
+
+      if (!body.key) {
+        return res.status(400).json({ error: 'Key must be provided' });
+      }
       const handlerResponse = await handler(body);
       return res.status(200).json(handlerResponse);
     } catch (error) {

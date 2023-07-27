@@ -1,7 +1,7 @@
 {
   "name": "@arcxp/arcxp-ifx-node-sdk",
-  "version": "1.2.0",
-  "description": "ArcXP Node.js SDK NPM package",
+  "version": "1.2.2",
+  "description": "Arc XP Node.js SDK NPM package",
   "engines": {
     "node": ">=18.x",
     "npm": ">=8.x"

@@ -2,8 +2,15 @@ const eventsParser = require('./eventsParser');
 
 const noHandlerFound = () => ({ message: 'No handler was found for the event.' });
 
-const eventsHandlersRouter = (eventsHandlers, eventsRouter) => async (event) => {
-  const eventProcessed = eventsParser(event);
+// eslint-disable-next-line max-len
+const eventsHandlersRouter = (eventsHandlers, eventsRouter, transformEvents = true) => async (event) => {
+  let eventProcessed;
+
+  if (transformEvents) {
+    eventProcessed = eventsParser(event);
+  } else {
+    eventProcessed = event;
+  }
 
   let handler = noHandlerFound;
 
