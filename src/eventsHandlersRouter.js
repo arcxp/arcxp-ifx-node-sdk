@@ -2,6 +2,16 @@ const eventsParser = require('./eventsParser');
 
 const noHandlerFound = () => ({ message: 'No handler was found for the event.' });
 
+/**
+ * Creates a unified event handler and router function for processing events.
+ *
+ * @param {Object} eventsHandlers - An object containing event handlers for different event types.
+ * @param {Object} eventsRouter - An object specifying the mapping between event keys and handler
+ * types.
+ * @param {*} transformEvents Whether the request payload and response body should be transformed
+ * before being sent to their respective destinations.
+ * @returns
+ */
 // eslint-disable-next-line max-len
 const eventsHandlersRouter = (eventsHandlers, eventsRouter, transformEvents = true) => async (event) => {
   let eventProcessed;
@@ -27,7 +37,7 @@ const eventsHandlersRouter = (eventsHandlers, eventsRouter, transformEvents = tr
     handler = eventsHandlers.defaultHandler;
   }
 
-  return handler(eventProcessed);
+  return transformEvents ? { body: handler(eventProcessed) } : handler(eventProcessed);
 };
 
 module.exports = eventsHandlersRouter;

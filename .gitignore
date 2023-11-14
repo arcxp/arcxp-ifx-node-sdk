@@ -128,8 +128,8 @@ lib/
 .idea
 
 # IFX
-.husky
 cfn/configs
 codebuild
 .eslintrc.js
 .npmignore
+.github/
