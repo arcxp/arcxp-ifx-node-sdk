@@ -36,8 +36,9 @@ const eventsHandlersRouter = (eventsHandlers, eventsRouter, transformEvents = tr
   } else if (Object.hasOwn(eventsHandlers, 'defaultHandler')) {
     handler = eventsHandlers.defaultHandler;
   }
+  const response = await handler(eventProcessed);
 
-  return transformEvents ? { body: handler(eventProcessed) } : handler(eventProcessed);
+  return transformEvents ? { body: response } : response;
 };
 
 module.exports = eventsHandlersRouter;
